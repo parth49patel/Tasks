@@ -6,19 +6,15 @@
 //
 
 import SwiftUI
-import Firebase
 
 @main
 struct ToDoListApp: App {
-    init () {
-        FirebaseApp.configure()
-        print("Configured Firebase!")
-    }
-    @StateObject var taskListViewModel = TaskListViewModel()
+    @EnvironmentObject var taskListViewModel: TaskListViewModel
+    
     var body: some Scene {
         WindowGroup {
-                LogInView()
-                    .environmentObject(taskListViewModel)
+            TasksList()
+                .environmentObject(TaskListViewModel())
         }
     }
 }

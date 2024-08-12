@@ -1,16 +1,16 @@
 //
-//  LogInButton.swift
+//  SaveTaskButton.swift
 //  ToDoList
 //
-//  Created by Parth Patel on 2024-07-31.
+//  Created by Parth Patel on 2024-07-22.
 //
 
 import SwiftUI
 
-struct LogInButton: View {
+struct SaveTaskButton: View {
     var body: some View {
-        Text("Log In")
-            .font(.callout)
+        Text("Save Task")
+            .font(.headline)
             .fontDesign(.monospaced)
             .padding()
             .foregroundColor(.white)
@@ -22,5 +22,5 @@ struct LogInButton: View {
 }
 
 #Preview {
-    LogInButton()
+    SaveTaskButton()
 }

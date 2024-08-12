@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class TaskListViewModel: ObservableObject {
     
     @Published var tasks: [TaskListModel] = [] {
@@ -38,5 +39,11 @@ class TaskListViewModel: ObservableObject {
         if let index = tasks.firstIndex(where: { $0.id == task.id}) {
             tasks[index] = task.updateCompletion()
         }
+    }
+    func deleteTask(indexSet: IndexSet) {
+        tasks.remove(atOffsets: indexSet)
+    }
+    func moveTask(from: IndexSet, to: Int) {
+        tasks.move(fromOffsets: from, toOffset: to)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TasksList: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var taskListViewModel: TaskListViewModel
     @State var addTaskView: Bool = false
     
@@ -18,32 +18,26 @@ struct TasksList: View {
             List {
                 ForEach(taskListViewModel.tasks) { task in
                     TaskRowView(task: task)
+                        .padding(-10)
                         .onTapGesture {
                             withAnimation(.linear) {
                                 taskListViewModel.updateTask(task: task)
                             }
                         }
                 }
-                .onDelete(perform: deleteTask)
-                .onMove(perform: moveTask)
+                .onDelete(perform: taskListViewModel.deleteTask(indexSet:))
+                .onMove(perform: taskListViewModel.moveTask(from:to:))
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Task List")
+            .navigationTitle("Tasks")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
-                        .fontWeight(.bold)
+                        .font(.title3)
+                        .bold()
                 }
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        addTaskView.toggle()
-                    } label: {
-                        Image(systemName: "plus.circle")
-                            .fontWeight(.bold)
-                    }
-                    .sheet(isPresented: $addTaskView) {
-                        AddTask()
-                    }
+                ToolbarItem(placement: .bottomBar) {
+                    AddNewTaskButton().offset(x: 90)
                 }
             }
         }
@@ -52,18 +46,7 @@ struct TasksList: View {
 
 struct TasksList_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            TasksList()
-        }
-        .environmentObject(TaskListViewModel())
-    }
-}
-
-extension TasksList {
-    func deleteTask(indexSet: IndexSet) {
-        taskListViewModel.tasks.remove(atOffsets: indexSet)
-    }
-    func moveTask(from: IndexSet, to: Int) {
-        taskListViewModel.tasks.move(fromOffsets: from, toOffset: to)
+        TasksList()
+            .environmentObject(TaskListViewModel())
     }
 }
