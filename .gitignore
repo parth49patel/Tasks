@@ -1,2 +1,97 @@
-# Ignore all Info.plist files
-*.plist
+# Xcode
+DerivedData/
+.idea/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.xcuserstate
+*.xcworkspace
+
+# Swift Package Manager
+/.build/
+/Packages
+/*.xcodeproj/project.xcworkspace/
+/*.xcodeproj/xcuserdata/
+/*.xcodeproj/xcuserdata/*
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Archives
+*.xcarchive
+
+# iOS specific
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# SwiftUI Previews
+.swiftpm/
+.swiftpm/xcode
+
+# Core Data
+*.xccurrentversion
+
+# Build artifacts
+build/
+*.o
+*.linkfilelist
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.bplist
+*.dylib
+*.tbd
+
+# Temporary files
+*.swp
+*.swo
+*.moved-aside
+*.seed
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.cmd
+*.dat
+*.dot
+*.pid
+*.tar.gz
+
+# Index
+*.idx
+*.index
+*.IndexStore
+
+# OS specific files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.idea/
+
+# Xcode breakpoints and schemes
+*.xcdebugger/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/
+
+# Ignore Info.plist files (if desired)
+# Info.plist
