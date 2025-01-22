@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddTask: View {
     
@@ -13,6 +14,7 @@ struct AddTask: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     @State var task: String = ""
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         ScrollView {
@@ -50,7 +52,7 @@ struct AddTask: View {
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     func saveTaskPressed() {
-        taskListViewModel.addTask(title: task)
+        taskListViewModel.addTask(title: task, modelContext: modelContext)
         dismiss()
     }
 }
@@ -58,6 +60,7 @@ struct AddTask: View {
 struct AddTask_Previews: PreviewProvider {
     static var previews: some View {
         AddTask()
+            .modelContainer(for: TaskListModel.self)
             .environmentObject(TaskListViewModel())
     }
 }

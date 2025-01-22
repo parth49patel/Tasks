@@ -6,44 +6,39 @@
 //
 
 import Foundation
+import SwiftData
 
 @MainActor
 class TaskListViewModel: ObservableObject {
-    
-    @Published var tasks: [TaskListModel] = [] {
-        didSet {
-            saveTasks()
-        }
-    }
-    let tasksKey: String = "tasks_key"
-    init() {
-       getTasks()
-    }
-    func getTasks() {
-        guard let data = UserDefaults.standard.data(forKey: tasksKey),
-              let savedTasks = try? JSONDecoder().decode([TaskListModel].self, from: data) else {
-            return
-        }
-        self.tasks = savedTasks
-    }
-    func addTask(title: String) {
+
+    func addTask(title: String, modelContext: ModelContext) {
         let newTask = TaskListModel(task: title, isCompleted: false)
-        tasks.append(newTask)
-    }
-    func saveTasks() {
-        if let encodedData = try? JSONEncoder().encode(tasks){
-            UserDefaults.standard.set(encodedData, forKey: tasksKey)
+        modelContext.insert(newTask)
+        do {
+            try modelContext.save()
+        } catch {
+            print("Failed to save task: \(error)")
         }
     }
-    func updateTask(task: TaskListModel) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id}) {
-            tasks[index] = task.updateCompletion()
+    
+    func updateTask(task: TaskListModel, modelContext: ModelContext) {
+        task.isCompleted.toggle()
+        do {
+            try modelContext.save()
+        } catch {
+            print("Failed to save context: \(error)")
         }
     }
-    func deleteTask(indexSet: IndexSet) {
-        tasks.remove(atOffsets: indexSet)
-    }
-    func moveTask(from: IndexSet, to: Int) {
-        tasks.move(fromOffsets: from, toOffset: to)
+    
+    func deleteTask(indexSet: IndexSet, tasks: [TaskListModel], modelContext: ModelContext) {
+        indexSet.forEach { index in
+            let taskToDelete = tasks[index]
+            modelContext.delete(taskToDelete)
+        }
+        do {
+            try modelContext.save()
+        } catch {
+            print("Failed to save context: \(error)")
+        }
     }
 }

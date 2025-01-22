@@ -6,27 +6,32 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TasksList: View {
+    
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var taskListViewModel: TaskListViewModel
     @State var addTaskView: Bool = false
+    @Query var tasks: [TaskListModel]
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         
         NavigationStack {
             List {
-                ForEach(taskListViewModel.tasks) { task in
+                ForEach(tasks) { task in
                     TaskRowView(task: task)
                         .padding(-10)
                         .onTapGesture {
                             withAnimation(.linear) {
-                                taskListViewModel.updateTask(task: task)
+                                taskListViewModel.updateTask(task: task, modelContext: modelContext)
                             }
                         }
                 }
-                .onDelete(perform: taskListViewModel.deleteTask(indexSet:))
-                .onMove(perform: taskListViewModel.moveTask(from:to:))
+                .onDelete { indexSet in
+                    taskListViewModel.deleteTask(indexSet: indexSet, tasks: tasks, modelContext: modelContext)
+                }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Tasks")
@@ -47,6 +52,7 @@ struct TasksList: View {
 struct TasksList_Previews: PreviewProvider {
     static var previews: some View {
         TasksList()
+            .modelContainer(for: TaskListModel.self)
             .environmentObject(TaskListViewModel())
     }
 }

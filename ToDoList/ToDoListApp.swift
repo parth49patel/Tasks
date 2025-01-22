@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ToDoListApp: App {
-    @EnvironmentObject var taskListViewModel: TaskListViewModel
     
     var body: some Scene {
         WindowGroup {
             TasksList()
+                .modelContainer(for: TaskListModel.self)
                 .environmentObject(TaskListViewModel())
         }
     }

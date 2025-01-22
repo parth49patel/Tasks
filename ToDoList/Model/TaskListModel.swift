@@ -6,11 +6,13 @@
 //
 
 import Foundation
- 
-struct TaskListModel: Identifiable, Codable {
-    let id: String
-    let task: String
-    let isCompleted: Bool
+import SwiftData
+
+@Model
+class TaskListModel: ObservableObject {
+    @Attribute(.unique) var id: String
+    var task: String
+    var isCompleted: Bool
     
     init(id: String = UUID().uuidString, task: String, isCompleted: Bool) {
         self.id = id
