@@ -13,7 +13,7 @@ struct TasksList: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var taskListViewModel: TaskListViewModel
     @State var addTaskView: Bool = false
-    @Query var tasks: [TaskListModel]
+    @Query(sort: \TaskListModel.order, order: .forward) var tasks: [TaskListModel]
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
@@ -32,6 +32,11 @@ struct TasksList: View {
                 .onDelete { indexSet in
                     taskListViewModel.deleteTask(indexSet: indexSet, tasks: tasks, modelContext: modelContext)
                 }
+                .onMove { indexSet, newOffset in
+                    withAnimation {
+                        taskListViewModel.moveTasks(indices: indexSet, newOffset: newOffset, tasks: tasks, modelContext: modelContext)
+                    }
+                }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Tasks")
@@ -42,7 +47,7 @@ struct TasksList: View {
                         .bold()
                 }
                 ToolbarItem(placement: .bottomBar) {
-                    AddNewTaskButton().offset(x: 90)
+                    AddNewTaskButton().offset(x: 90, y: -10)
                 }
             }
         }

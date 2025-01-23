@@ -40,8 +40,8 @@ struct TaskRowView: View {
 
 struct ListRowView_Previews: PreviewProvider {
     
-    static var task1 = TaskListModel(task: "First Item", isCompleted: false)
-    static var task2 = TaskListModel(task: "Second Item", isCompleted: false)
+    static var task1 = TaskListModel(task: "First Item", isCompleted: false, order: 1)
+    static var task2 = TaskListModel(task: "Second Item", isCompleted: false, order: 2)
     
     static var previews: some View {
         Group {

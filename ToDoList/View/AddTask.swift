@@ -15,6 +15,7 @@ struct AddTask: View {
     @Environment(\.dismiss) var dismiss
     @State var task: String = ""
     @Environment(\.modelContext) private var modelContext
+    @Query(sort: \TaskListModel.order, order: .forward) var tasks: [TaskListModel]
     
     var body: some View {
         ScrollView {
@@ -34,7 +35,7 @@ struct AddTask: View {
                         .foregroundStyle(.black)
                         .background(
                             colorScheme == .light ?
-                            LinearGradient(colors: [Color(.systemFill), Color("textField")], startPoint: .leading, endPoint: .trailing) :
+                            LinearGradient(colors: [Color(.systemFill), Color("textField")], startPoint: .trailing, endPoint: .leading) :
                                 LinearGradient(colors: [Color(.gray), Color("textField")], startPoint: .leading, endPoint: .trailing)
                         )
                         .clipShape(.rect(cornerRadius: 10))
@@ -52,7 +53,7 @@ struct AddTask: View {
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     func saveTaskPressed() {
-        taskListViewModel.addTask(title: task, modelContext: modelContext)
+        taskListViewModel.addTask(title: task, tasks: tasks, modelContext: modelContext)
         dismiss()
     }
 }
