@@ -7,33 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5105040D2C4EC86E0022B97A /* AddNewTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105040C2C4EC86E0022B97A /* AddNewTaskButton.swift */; };
 		5105040F2C4ED0E40022B97A /* AddTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105040E2C4ED0E40022B97A /* AddTask.swift */; };
 		510504112C4ED1220022B97A /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510504102C4ED1220022B97A /* TaskListModel.swift */; };
 		510504132C4ED2520022B97A /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510504122C4ED2520022B97A /* TaskListViewModel.swift */; };
-		510504152C4F16B60022B97A /* SaveTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510504142C4F16B50022B97A /* SaveTaskButton.swift */; };
 		510504172C4F28A90022B97A /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510504162C4F28A90022B97A /* TaskRowView.swift */; };
 		512B01B22C4EC13400468ADD /* ToDoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512B01B12C4EC13400468ADD /* ToDoListApp.swift */; };
 		512B01B42C4EC13400468ADD /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512B01B32C4EC13400468ADD /* TasksList.swift */; };
 		512B01B62C4EC13400468ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 512B01B52C4EC13400468ADD /* Assets.xcassets */; };
 		512B01B92C4EC13400468ADD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 512B01B82C4EC13400468ADD /* Preview Assets.xcassets */; };
-		519D20D92C6A61D900306718 /* DismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519D20D82C6A61D900306718 /* DismissButton.swift */; };
+		518C9F562DB716A100500D25 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518C9F552DB716A100500D25 /* ButtonView.swift */; };
 		51EDBDD62C62D36100EEBED3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EDBDD52C62D36100EEBED3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5105040C2C4EC86E0022B97A /* AddNewTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTaskButton.swift; sourceTree = "<group>"; };
 		5105040E2C4ED0E40022B97A /* AddTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTask.swift; sourceTree = "<group>"; };
 		510504102C4ED1220022B97A /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
 		510504122C4ED2520022B97A /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
-		510504142C4F16B50022B97A /* SaveTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTaskButton.swift; sourceTree = "<group>"; };
 		510504162C4F28A90022B97A /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
 		512B01AE2C4EC13400468ADD /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		512B01B12C4EC13400468ADD /* ToDoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListApp.swift; sourceTree = "<group>"; };
 		512B01B32C4EC13400468ADD /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
 		512B01B52C4EC13400468ADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		512B01B82C4EC13400468ADD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		519D20D82C6A61D900306718 /* DismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissButton.swift; sourceTree = "<group>"; };
+		518C9F552DB716A100500D25 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		51EDBDD52C62D36100EEBED3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,9 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				510504162C4F28A90022B97A /* TaskRowView.swift */,
-				5105040C2C4EC86E0022B97A /* AddNewTaskButton.swift */,
-				510504142C4F16B50022B97A /* SaveTaskButton.swift */,
-				519D20D82C6A61D900306718 /* DismissButton.swift */,
+				518C9F552DB716A100500D25 /* ButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -200,13 +194,11 @@
 			files = (
 				510504112C4ED1220022B97A /* TaskListModel.swift in Sources */,
 				5105040F2C4ED0E40022B97A /* AddTask.swift in Sources */,
+				518C9F562DB716A100500D25 /* ButtonView.swift in Sources */,
 				510504172C4F28A90022B97A /* TaskRowView.swift in Sources */,
-				5105040D2C4EC86E0022B97A /* AddNewTaskButton.swift in Sources */,
 				512B01B42C4EC13400468ADD /* TasksList.swift in Sources */,
 				512B01B22C4EC13400468ADD /* ToDoListApp.swift in Sources */,
-				519D20D92C6A61D900306718 /* DismissButton.swift in Sources */,
 				510504132C4ED2520022B97A /* TaskListViewModel.swift in Sources */,
-				510504152C4F16B60022B97A /* SaveTaskButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,46 +18,50 @@ struct TasksList: View {
     
     var body: some View {
         
-        NavigationStack {
-            List {
-                ForEach(tasks) { task in
-                    TaskRowView(task: task)
-                        .padding(-10)
-                        .onTapGesture {
-                            withAnimation(.linear) {
-                                taskListViewModel.updateTask(task: task, modelContext: modelContext)
+        ZStack {
+            NavigationStack {
+                List {
+                    ForEach(tasks) { task in
+                        TaskRowView(task: task)
+                            .padding(-10)
+                            .onTapGesture {
+                                withAnimation(.linear) {
+                                    taskListViewModel.updateTask(task: task, modelContext: modelContext)
+                                }
                             }
+                    }
+                    .onDelete { indexSet in
+                        taskListViewModel.deleteTask(indexSet: indexSet, tasks: tasks, modelContext: modelContext)
+                    }
+                    .onMove { indexSet, newOffset in
+                        withAnimation(.smooth) {
+                            taskListViewModel.moveTasks(indices: indexSet, newOffset: newOffset, tasks: tasks, modelContext: modelContext)
                         }
+                    }
                 }
-                .onDelete { indexSet in
-                    taskListViewModel.deleteTask(indexSet: indexSet, tasks: tasks, modelContext: modelContext)
+                .listStyle(.insetGrouped)
+                .navigationTitle("Tasks")
+                .sheet(isPresented: $addTaskView) {
+                    AddTask()
+                        .presentationDetents([.fraction(0.25)])
                 }
-                .onMove { indexSet, newOffset in
-                    withAnimation {
-                        taskListViewModel.moveTasks(indices: indexSet, newOffset: newOffset, tasks: tasks, modelContext: modelContext)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        EditButton()
+                            .font(.title3)
+                            .bold()
                     }
                 }
             }
-            .listStyle(.insetGrouped)
-            .navigationTitle("Tasks")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    EditButton()
-                        .font(.title3)
-                        .bold()
+            ButtonView(buttonName: "Add Task", icon: "plus.circle", backgroundColor: .gray.opacity(0.4), textColor: colorScheme == .light ? .black : .white)
+                .offset(x: 100, y: 360)
+                .onTapGesture {
+                    addTaskView = true
                 }
-                ToolbarItem(placement: .bottomBar) {
-                    AddNewTaskButton().offset(x: 90, y: -10)
-                }
-            }
         }
     }
 }
-
-struct TasksList_Previews: PreviewProvider {
-    static var previews: some View {
-        TasksList()
-            .modelContainer(for: TaskListModel.self)
-            .environmentObject(TaskListViewModel())
-    }
+#Preview {
+    TasksList()
+        .modelContainer(for: TaskListModel.self)
 }

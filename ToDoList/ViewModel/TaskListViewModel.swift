@@ -12,7 +12,7 @@ import SwiftData
 class TaskListViewModel: ObservableObject {
 
     func addTask(title: String, tasks: [TaskListModel], modelContext: ModelContext) {
-        let nextOrder = (tasks.max(by: { $0.order < $1.order })?.order ?? 0) + 1
+        let nextOrder = (tasks.map { $0.order }.max() ?? -1) + 1
         let newTask = TaskListModel(task: title, isCompleted: false, order: nextOrder)
         modelContext.insert(newTask)
         do {

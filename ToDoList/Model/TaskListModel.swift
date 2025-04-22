@@ -21,8 +21,4 @@ class TaskListModel: ObservableObject {
         self.isCompleted = isCompleted
         self.order = order
     }
-    
-//    func updateCompletion() -> TaskListModel {
-//        return TaskListModel(id: id, task: task, isCompleted: !isCompleted, order: order)
-//    }
 }

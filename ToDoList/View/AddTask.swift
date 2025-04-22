@@ -11,46 +11,32 @@ import SwiftData
 struct AddTask: View {
     
     @EnvironmentObject var taskListViewModel: TaskListViewModel
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     @State var task: String = ""
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \TaskListModel.order, order: .forward) var tasks: [TaskListModel]
     
     var body: some View {
-        ScrollView {
             VStack {
-                Button {
-                    dismiss()
-                } label: {
-                    DismissButton()
-                }
-                .offset(x: -160, y: 20)
-                .padding(.bottom, 200)
                 VStack{
                     TextField("Enter task..", text: $task)
                         .padding()
                         .font(.system(size: 20, design: .monospaced))
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                         .background(
-                            colorScheme == .light ?
-                            LinearGradient(colors: [Color(.systemFill), Color("textField")], startPoint: .trailing, endPoint: .leading) :
-                                LinearGradient(colors: [Color(.gray), Color("textField")], startPoint: .leading, endPoint: .trailing)
+                            Rectangle()
+                                .stroke()
+                                .foregroundColor(.primary)
                         )
-                        .clipShape(.rect(cornerRadius: 10))
-                    
                     Button {
                         saveTaskPressed()
                     } label: {
-                        SaveTaskButton()
+                        ButtonView(buttonName: "Save", icon: "square.and.arrow.down.fill", backgroundColor: .blue.opacity(0.8), textColor: .white)
                     }
-                    .padding(.top, 50)
+                    .padding(.top, 20)
                 }
                 .padding()
             }
-        }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     func saveTaskPressed() {
         taskListViewModel.addTask(title: task, tasks: tasks, modelContext: modelContext)
@@ -58,10 +44,8 @@ struct AddTask: View {
     }
 }
 
-struct AddTask_Previews: PreviewProvider {
-    static var previews: some View {
-        AddTask()
-            .modelContainer(for: TaskListModel.self)
-            .environmentObject(TaskListViewModel())
-    }
+#Preview {
+    AddTask()
+        .modelContainer(for: TaskListModel.self)
 }
+
