@@ -15,26 +15,29 @@ struct TaskRowView: View {
     var body: some View {
         HStack {
             Text(task.task)
+                .minimumScaleFactor(0.5)
+                .multilineTextAlignment(.leading)
             Spacer()
-            if colorScheme == .light {
             Image(systemName: task.isCompleted ? "checkmark.circle" : "circle")
-                    .foregroundStyle(task.isCompleted ? Color.green : Color.black)
-            } else {
-                Image(systemName: task.isCompleted ? "checkmark.circle" : "circle")
-                        .foregroundStyle(task.isCompleted ? Color.green : Color.white)
-            }
+                .foregroundStyle(
+                    task.isCompleted ? Color.green : (colorScheme == .light ? Color.black : Color.white)
+                )
         }
-        .fontDesign(.monospaced)
-        .font(.system(size: 20))
-        .fontWeight(task.isCompleted ? .regular : .semibold)
-        .fontWeight(task.isCompleted ? .light : .semibold)
+        .font(.system(size: 20, weight: task.isCompleted ? .light: .semibold, design: .monospaced))
         .padding([.horizontal, .vertical], 3)
         
-        .background((task.isCompleted && colorScheme == .light) ? LinearGradient(colors: [Color("completedTaskLight"), Color(.white)], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [Color.clear], startPoint: .leading, endPoint: .trailing)
+        .background(
+            task.isCompleted ? LinearGradient(
+                colors: colorScheme == .light
+                    ? [Color("completedTaskLight"), Color(.white)]
+                    : [Color("completedTaskDark"), Color(.black)],
+                startPoint: .leading,
+                endPoint: .trailing)
+            : LinearGradient(
+                colors: [Color.clear],
+                startPoint: .leading,
+                endPoint: .trailing)
         )
-        .background((task.isCompleted && colorScheme == .dark) ? LinearGradient(colors: [Color("completedTaskDark"), Color(.black)], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [Color.clear], startPoint: .leading, endPoint: .trailing)
-        )
-        
     }
 }
 

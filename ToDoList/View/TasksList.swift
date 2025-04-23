@@ -12,9 +12,10 @@ struct TasksList: View {
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var taskListViewModel: TaskListViewModel
-    @State var addTaskView: Bool = false
     @Query(sort: \TaskListModel.order, order: .forward) var tasks: [TaskListModel]
     @Environment(\.modelContext) private var modelContext
+    
+    @State var addTaskView: Bool = false
     
     var body: some View {
         
@@ -53,15 +54,25 @@ struct TasksList: View {
                     }
                 }
             }
-            ButtonView(buttonName: "Add Task", icon: "plus.circle", backgroundColor: .gray.opacity(0.4), textColor: colorScheme == .light ? .black : .white)
-                .offset(x: 100, y: 360)
-                .onTapGesture {
-                    addTaskView = true
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        addTaskView = true
+                    } label: {
+                        ButtonView(buttonName: "Add Task", icon: "plus.circle", backgroundColor: .gray.opacity(0.4), textColor: colorScheme == .light ? .black : .white)
+                    }
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 30)
+                    .accessibilityIdentifier("AddTaskButton")
                 }
+            }
         }
     }
 }
 #Preview {
     TasksList()
+        .environmentObject(TaskListViewModel())
         .modelContainer(for: TaskListModel.self)
 }

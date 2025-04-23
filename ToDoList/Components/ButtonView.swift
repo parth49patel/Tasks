@@ -17,7 +17,7 @@ struct ButtonView: View {
     var body: some View {
         VStack {
             Label(buttonName, systemImage: icon)
-                .font(.headline)
+                .font(.system(size: 20, weight: .medium, design: .monospaced))
                 .foregroundStyle(textColor)
                 .padding(10)
                 .background(Color(backgroundColor))

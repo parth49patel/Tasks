@@ -17,26 +17,27 @@ struct AddTask: View {
     @Query(sort: \TaskListModel.order, order: .forward) var tasks: [TaskListModel]
     
     var body: some View {
-            VStack {
-                VStack{
-                    TextField("Enter task..", text: $task)
-                        .padding()
-                        .font(.system(size: 20, design: .monospaced))
-                        .foregroundStyle(.primary)
-                        .background(
-                            Rectangle()
-                                .stroke()
-                                .foregroundColor(.primary)
-                        )
-                    Button {
-                        saveTaskPressed()
-                    } label: {
-                        ButtonView(buttonName: "Save", icon: "square.and.arrow.down.fill", backgroundColor: .blue.opacity(0.8), textColor: .white)
-                    }
-                    .padding(.top, 20)
-                }
+        VStack{
+            TextField("Enter task..", text: $task)
                 .padding()
+                .font(.system(size: 20, design: .monospaced))
+                .foregroundStyle(.primary)
+                .accessibilityIdentifier("AddTaskTextField")
+                .background(
+                    Rectangle()
+                        .stroke()
+                        .foregroundColor(.primary)
+                )
+            Button {
+                saveTaskPressed()
+            } label: {
+                ButtonView(buttonName: "Save", icon: "square.and.arrow.down.fill", backgroundColor: task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .gray : .blue, textColor: .white)
             }
+            .accessibilityIdentifier("SaveTaskButton")
+            .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            .padding(.top, 20)
+        }
+        .padding()
     }
     func saveTaskPressed() {
         taskListViewModel.addTask(title: task, tasks: tasks, modelContext: modelContext)
